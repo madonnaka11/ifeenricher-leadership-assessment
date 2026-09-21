@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="แบบประเมินแรงจูงใจการเป็นผู้นำ เพื่อสะท้อนจุดแข็งและแนวทางพัฒนาตนเอง">
+<title>Leadership Motivation Assessment | LifeEnricher</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@300;400;500;600;700;800;900&display=swap">
+<style>
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  .le-root {
+    font-family: 'Noto Sans Thai', 'Noto Sans', system-ui, sans-serif;
+    background: #F9F9F9;
+    color: #1C1819;
+  }
+  a { color: #972626; text-decoration: none; cursor: pointer; }
+  a:hover { color: #1C1819; }
+
+  .le-btn-primary { transition: opacity .15s ease, transform .15s ease; cursor: pointer; }
+  .le-btn-primary:hover { opacity: .88; }
+  .le-btn-primary:active { transform: scale(0.98); }
+
+  .le-text-link { color: #972626; cursor: pointer; transition: color .15s ease; }
+  .le-text-link:hover { color: #1C1819; }
+
+  .le-card {
+    background: #F9F9F9;
+    color: #1C1819;
+    border: 1.5px solid rgba(28,24,25,0.16);
+    border-radius: 16px;
+    padding: 17px 18px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 500;
+    line-height: 1.6;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .15s ease, background .15s ease, color .15s ease, transform .1s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+  .le-card:hover { border-color: #972626; }
+  .le-card:active { transform: scale(0.99); }
+  .le-card.selected { background: #972626; color: #F9F9F9; border-color: #972626; }
+
+  .le-dot {
+    flex: 0 0 auto;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(28,24,25,0.28);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .le-card.selected .le-dot { border-color: #F9F9F9; }
+
+  .le-next {
+    width: 100%;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: #972626; color: #F9F9F9;
+    border: none; border-radius: 14px;
+    padding: 17px 20px;
+    font-family: inherit; font-size: 15.5px; font-weight: 700; letter-spacing: 0.01em;
+    cursor: pointer;
+    transition: opacity .15s ease;
+  }
+  .le-next:hover { opacity: .88; }
+  .le-next.disabled { opacity: .35; pointer-events: none; }
+
+  .le-meter-track {
+    width: 100%; height: 7px;
+    background: #F9F9F9;
+    border: 1px solid rgba(28,24,25,0.18);
+    border-radius: 100px;
+    overflow: hidden;
+  }
+  .le-meter-fill { height: 100%; background: #972626; border-radius: 100px; }
+
+  .le-input {
+    width: 100%;
+    background: #F9F9F9;
+    border: 1.5px solid rgba(28,24,25,0.55);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: inherit;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: #1C1819;
+    outline: none;
+    transition: border-color .15s ease;
+  }
+  .le-input:focus { border-color: #972626; }
+  .le-input::placeholder { color: #1C1819; opacity: .38; }
+
+  .le-checkbox {
+    flex: 0 0 auto;
+    width: 19px; height: 19px;
+    border-radius: 5px;
+    border: 1.5px solid #1C1819;
+    background: #F9F9F9;
+    margin-top: 1px;
+    display: flex; align-items: center; justify-content: center;
+    transition: background .15s ease, border-color .15s ease;
+  }
+  .le-checkbox.checked { background: #972626; border-color: #972626; }
+
+  .le-error-text { color: #972626; font-size: 12px; line-height: 1.6; margin-top: 6px; }
+
+  /*
+   * The one deliberate exception to the LifeEnricher three-color palette:
+   * the LINE hand-off CTA uses LINE's own brand green so it reads as a
+   * recognizable "add on LINE" action, per explicit request. Nothing
+   * else in the assessment uses this color.
+   */
+  .le-line-btn { background: #06C755; transition: opacity .15s ease, transform .15s ease; cursor: pointer; }
+  .le-line-btn:hover { opacity: .88; }
+  .le-line-btn:active { transform: scale(0.98); }
+
+  /* Responsive shell: keep the focused mobile flow, but give desktop users
+     a comfortable reading width and clear card-like assessment surface. */
+  @media (min-width: 768px) {
+    body { background: #EFECEC; }
+    .le-root {
+      width: min(640px, calc(100vw - 64px)) !important;
+      margin: 32px 0;
+      border-radius: 24px;
+      box-shadow: 0 18px 60px rgba(28,24,25,.10);
+    }
+    .le-root > sc-if > div {
+      min-height: calc(100vh - 64px) !important;
+    }
+    .le-root h1 { font-size: 40px !important; }
+    .le-root p { max-width: 520px !important; }
+  }
+
+  @media (max-width: 767px) {
+    .le-root {
+      width: 100% !important;
+      min-height: 100vh;
+    }
+  }
+
+body{background:#F9F9F9} .screen{min-height:100vh} .hidden{display:none!important}
+</style></head><body><main id="app"></main>
+<script>
+var QUESTIONS = [
+  { dim: 'D1', text: 'เมื่อสมาชิกทีมที่เคยทำผลงานดีเริ่มมีผลงานลดลง\nคุณมักทำอะไรเป็นอันดับแรก?', options: [
+    { id: 'a', label: 'ย้ำเป้าหมายและมาตรฐานที่คาดหวัง', score: 2 },
+    { id: 'b', label: 'ถามว่าเกิดอะไรขึ้น และฟังสถานการณ์ของเขาก่อน', score: 4 },
+    { id: 'c', label: 'ปรับงานบางส่วนให้เขาทันที', score: 3 },
+    { id: 'd', label: 'รอดูอีกระยะว่าเขาจะกลับมาได้เองหรือไม่', score: 1 }
+  ]},
+  { dim: 'D1', text: 'เมื่อลูกทีมสองคนตอบสนองต่อวิธีบริหารแบบเดียวกันต่างกันมาก\nคุณมักจะ...', options: [
+    { id: 'a', label: 'ใช้มาตรฐานเดียวกัน เพราะทุกคนควรได้รับการปฏิบัติเท่าเทียม', score: 1 },
+    { id: 'b', label: 'พยายามหาเหตุผลว่าอะไรเป็นแรงขับของแต่ละคน', score: 4 },
+    { id: 'c', label: 'ให้คนที่ผลงานดีกว่าเป็นตัวอย่าง', score: 2 },
+    { id: 'd', label: 'เปลี่ยนวิธีเฉพาะเมื่อเกิดปัญหา', score: 3 }
+  ]},
+  { dim: 'D1', text: 'ก่อนมอบหมายงานสำคัญให้ใคร\nคุณให้น้ำหนักกับอะไรที่สุด?', options: [
+    { id: 'a', label: 'ใครมีเวลาว่าง', score: 1 },
+    { id: 'b', label: 'ใครเคยทำงานแบบนี้มาก่อน', score: 2 },
+    { id: 'c', label: 'จุดแข็ง แรงจูงใจ และความพร้อมของแต่ละคน', score: 4 },
+    { id: 'd', label: 'คนที่ไว้ใจว่าจะทำตามได้', score: 3 }
+  ]},
+  { dim: 'D1', text: 'เมื่อสมาชิกทีมมีพฤติกรรมที่คุณไม่เข้าใจ\nคุณมัก...', options: [
+    { id: 'a', label: 'บอกตรง ๆ ว่าพฤติกรรมนั้นควรเปลี่ยน', score: 2 },
+    { id: 'b', label: 'พยายามทำความเข้าใจสิ่งที่อยู่เบื้องหลังพฤติกรรมนั้นก่อน', score: 4 },
+    { id: 'c', label: 'ถามคนอื่นว่าเขาเป็นแบบนี้ปกติหรือไม่', score: 3 },
+    { id: 'd', label: 'ปล่อยไปถ้ายังไม่กระทบงาน', score: 1 }
+  ]},
+  { dim: 'D2', text: 'เมื่อทีมเข้าใจงานไม่ตรงกับสิ่งที่คุณต้องการ\nคุณมัก...', options: [
+    { id: 'a', label: 'อธิบายใหม่ให้ละเอียดกว่าเดิม', score: 3 },
+    { id: 'b', label: 'ถามกลับว่าทีมเข้าใจเป้าหมายและเหตุผลของงานนี้อย่างไร', score: 4 },
+    { id: 'c', label: 'ทำตัวอย่างให้ดู', score: 2 },
+    { id: 'd', label: 'ส่งรายละเอียดเป็นลายลักษณ์อักษรเพิ่มเติม', score: 1 }
+  ]},
+  { dim: 'D2', text: 'เมื่อคุณต้องให้ Feedback เรื่องที่อีกฝ่ายอาจไม่อยากได้ยิน\nคุณมัก...', options: [
+    { id: 'a', label: 'พูดตรงประเด็นเพื่อไม่ให้เสียเวลา', score: 2 },
+    { id: 'b', label: 'อธิบายสิ่งที่สังเกต ผลกระทบ และชวนอีกฝ่ายสะท้อนมุมของตัวเอง', score: 4 },
+    { id: 'c', label: 'เริ่มจากชมก่อน แล้วค่อยพูดเรื่องที่ต้องแก้', score: 3 },
+    { id: 'd', label: 'รอให้มีจังหวะเหมาะสมก่อน', score: 1 }
+  ]},
+  { dim: 'D2', text: 'ในการประชุมทีม\nคุณรู้ได้อย่างไรว่าทีมเข้าใจจริง?', options: [
+    { id: 'a', label: 'ไม่มีใครถามเพิ่มเติม', score: 1 },
+    { id: 'b', label: 'ทุกคนตอบว่ารับทราบ', score: 2 },
+    { id: 'c', label: 'ให้ทีมสรุปสิ่งที่เข้าใจและ Next Step กลับมา', score: 4 },
+    { id: 'd', label: 'ดูจากงานหลังประชุม', score: 3 }
+  ]},
+  { dim: 'D2', text: 'เมื่อลูกทีมไม่เห็นด้วยกับความคิดเห็นของคุณ\nคุณมัก...', options: [
+    { id: 'a', label: 'อธิบายเหตุผลของตัวเองให้ชัดขึ้น', score: 3 },
+    { id: 'b', label: 'ถามเหตุผลและพยายามเข้าใจมุมมองของเขาก่อนตัดสินใจ', score: 4 },
+    { id: 'c', label: 'ให้ทีมโหวต', score: 2 },
+    { id: 'd', label: 'ตัดสินใจเองเพราะเป็นผู้รับผิดชอบสุดท้าย', score: 1 }
+  ]},
+  { dim: 'D3', text: 'เมื่อเกิดความผิดพลาดใหญ่และคุณรู้สึกไม่พอใจ\nคุณมัก...', options: [
+    { id: 'a', label: 'จัดการปัญหาทันทีแม้ยังอารมณ์อยู่', score: 1 },
+    { id: 'b', label: 'รู้เท่าทันอารมณ์ตัวเองก่อนเลือกวิธีตอบสนอง', score: 4 },
+    { id: 'c', label: 'แยกตัวออกไปจนกว่าจะใจเย็น', score: 3 },
+    { id: 'd', label: 'ให้คนอื่นจัดการแทนก่อน', score: 2 }
+  ]},
+  { dim: 'D3', text: 'เมื่อทีมมีความขัดแย้งกัน\nคุณมัก...', options: [
+    { id: 'a', label: 'ตัดสินว่าใครควรทำอะไร แล้วให้เดินหน้าต่อ', score: 2 },
+    { id: 'b', label: 'เปิดพื้นที่ให้แต่ละฝ่ายพูดถึงข้อเท็จจริง ความต้องการ และมุมมอง', score: 4 },
+    { id: 'c', label: 'แยกคนที่มีปัญหาออกจากกัน', score: 1 },
+    { id: 'd', label: 'รอดูว่าทีมจะจัดการกันเองได้หรือไม่', score: 3 }
+  ]},
+  { dim: 'D3', text: 'เมื่อสมาชิกทีมเสนอความคิดเห็นที่ต่างจากคุณอย่างมาก\nคุณมักมองสถานการณ์นั้นอย่างไร?', options: [
+    { id: 'a', label: 'ต้องรีบหาข้อสรุปเพื่อไม่ให้ทีมสับสน', score: 1 },
+    { id: 'b', label: 'เป็นข้อมูลอีกมุมหนึ่งที่ควรสำรวจก่อนตัดสินใจ', score: 4 },
+    { id: 'c', label: 'ต้องดูว่าเสียงส่วนใหญ่คิดอย่างไร', score: 3 },
+    { id: 'd', label: 'ขึ้นอยู่กับว่าเขามีประสบการณ์มากพอหรือไม่', score: 2 }
+  ]},
+  { dim: 'D3', text: 'เมื่อทีมทำงานภายใต้ความกดดันสูง\nคุณมักให้ความสำคัญกับอะไร?', options: [
+    { id: 'a', label: 'Deadline เป็นอันดับแรก', score: 2 },
+    { id: 'b', label: 'ทั้งผลลัพธ์และสภาพของคนที่จะพาทีมไปถึงผลลัพธ์', score: 4 },
+    { id: 'c', label: 'การลดปริมาณงาน', score: 3 },
+    { id: 'd', label: 'การเพิ่มการติดตามให้ถี่ขึ้น', score: 1 }
+  ]},
+  { dim: 'D4', text: 'เมื่อลูกทีมทำงานได้ตามที่สั่ง\nแต่ไม่ค่อยคิดหรือริเริ่มเอง\nคุณมัก...', options: [
+    { id: 'a', label: 'ให้รายละเอียดมากขึ้นเพื่อให้ผิดพลาดน้อยลง', score: 2 },
+    { id: 'b', label: 'ให้พื้นที่เขาตัดสินใจ พร้อมกำหนดขอบเขตและผลลัพธ์ที่ต้องการ', score: 4 },
+    { id: 'c', label: 'เปลี่ยนงานให้คนที่เก่งกว่า', score: 1 },
+    { id: 'd', label: 'รอให้มีประสบการณ์มากขึ้นก่อน', score: 3 }
+  ]},
+  { dim: 'D4', text: 'หากต้องการให้ทีมทำงานที่ยากและท้าทาย\nคุณมักใช้วิธีใด?', options: [
+    { id: 'a', label: 'ตั้งเป้าหมายและ Deadline ให้ชัด', score: 3 },
+    { id: 'b', label: 'เชื่อมงานกับความหมาย เป้าหมาย และแรงจูงใจของคน', score: 4 },
+    { id: 'c', label: 'เพิ่ม Reward', score: 2 },
+    { id: 'd', label: 'ย้ำผลกระทบหากงานไม่สำเร็จ', score: 1 }
+  ]},
+  { dim: 'D4', text: 'เมื่อสมาชิกทีมทำผิดพลาด\nคุณมองบทบาทของตัวเองอย่างไร?', options: [
+    { id: 'a', label: 'ทำให้เขาจำวิธีที่ถูกต้อง', score: 2 },
+    { id: 'b', label: 'ช่วยให้เขาเข้าใจสิ่งที่เกิดขึ้น เรียนรู้ และคิดวิธีใหม่ด้วยตัวเอง', score: 4 },
+    { id: 'c', label: 'ตรวจงานเขามากขึ้นในครั้งต่อไป', score: 3 },
+    { id: 'd', label: 'ลดความรับผิดชอบลงชั่วคราว', score: 1 }
+  ]},
+  { dim: 'D4', text: 'สำหรับคุณ\nสัญญาณสำคัญที่สุดว่าทีมกำลังเติบโตคืออะไร?', options: [
+    { id: 'a', label: 'งานผิดพลาดน้อยลง', score: 2 },
+    { id: 'b', label: 'ทีมทำตามระบบได้ดีขึ้น', score: 3 },
+    { id: 'c', label: 'ทีมคิด ตัดสินใจ รับผิดชอบ และพัฒนาต่อได้แม้คุณไม่ได้อยู่ตรงนั้น', score: 4 },
+    { id: 'd', label: 'Performance สูงขึ้นอย่างต่อเนื่อง', score: 1 }
+  ]}
+];
+
+var DIMENSION_META = {
+  D1: {
+    name: 'ความเข้าใจคน',
+    strength: 'คุณมีแนวโน้มมองลึกกว่าพฤติกรรมที่เห็น และพยายามทำความเข้าใจแรงจูงใจ ความพร้อม และความแตกต่างของคนก่อนเลือกวิธีบริหาร',
+    development: 'ลองขยับจากการมองว่า “คนควรทำอะไร” ไปสู่คำถามว่า “อะไรทำให้คนคนนี้เลือกทำหรือไม่ทำสิ่งนั้น” เพราะพฤติกรรมเดียวกันอาจมีแรงจูงใจเบื้องหลังที่ต่างกัน',
+    suggestion: 'ลองตั้งคำถามปลายเปิดกับสมาชิกทีมอย่างน้อยสัปดาห์ละครั้ง เพื่อสำรวจแรงจูงใจที่อยู่เบื้องหลังการทำงานของแต่ละคน'
+  },
+  D2: {
+    name: 'การสื่อสารเพื่อการนำทีม',
+    strength: 'คุณให้ความสำคัญกับการสร้างความเข้าใจร่วม ไม่ได้มองการสื่อสารเป็นเพียงการส่งคำสั่ง แต่ใช้การฟัง คำถาม และ Feedback เพื่อให้ทีมเห็นทิศทางเดียวกัน',
+    development: 'ลองเพิ่มการสื่อสารแบบสองทางให้มากขึ้น โดยไม่เพียงถามว่า “เข้าใจไหม” แต่ชวนให้ทีมสะท้อนกลับว่าเขาเข้าใจเป้าหมาย เหตุผล และสิ่งที่ต้องทำต่ออย่างไร',
+    suggestion: 'ก่อนจบการประชุมทุกครั้ง ลองให้ทีมสรุปสิ่งที่เข้าใจกลับมาเป็นคำพูดของเขาเอง เพื่อเช็คว่าทุกคนเข้าใจตรงกันจริง'
+  },
+  D3: {
+    name: 'การนำผ่านอารมณ์และบรรยากาศ',
+    strength: 'คุณมีแนวโน้มตระหนักว่าอารมณ์ของผู้นำส่งผลต่อวิธีคิด ความมั่นใจ และบรรยากาศของทีม และสามารถเว้นพื้นที่ก่อนเลือกวิธีตอบสนอง',
+    development: 'ก่อนจัดการสถานการณ์ ลองสังเกตอารมณ์ของตัวเองและอารมณ์ในทีมให้มากขึ้น เพราะวิธีที่ผู้นำตอบสนองในช่วงกดดันสามารถกำหนดความปลอดภัยและความกล้าแสดงออกของทีมได้',
+    suggestion: 'ฝึกหยุดสังเกตอารมณ์ของตัวเอง 5–10 วินาทีก่อนตอบสนองในสถานการณ์ที่กดดัน เพื่อเลือกวิธีตอบสนองอย่างมีสติมากขึ้น'
+  },
+  D4: {
+    name: 'การสร้างแรงจูงใจและพัฒนาคน',
+    strength: 'คุณมีแนวโน้มสร้างแรงจูงใจจากภายใน เปิดพื้นที่ให้ทีมคิด ตัดสินใจ และเรียนรู้ ทำให้คนไม่ได้เพียงทำงานสำเร็จ แต่ค่อย ๆ พึ่งพาตัวเองได้มากขึ้น',
+    development: 'ลองขยับจากการ “ทำให้คนทำตาม” ไปสู่การสร้าง Ownership ด้วยการเชื่อมงานกับความหมาย ให้พื้นที่ตัดสินใจ และใช้ข้อผิดพลาดเป็นโอกาสในการพัฒนาคน',
+    suggestion: 'ลองมอบหมายงานที่มีพื้นที่ให้ตัดสินใจเอง พร้อมกำหนดผลลัพธ์ที่ชัดเจน แทนการกำหนดวิธีการทีละขั้นตอน'
+  }
+};
+
+var DIMENSION_ORDER = ['D1', 'D2', 'D3', 'D4'];
+var DIMENSION_QUESTION_INDEXES = { D1: [0,1,2,3], D2: [4,5,6,7], D3: [8,9,10,11], D4: [12,13,14,15] };
+
+// Single, clearly-named configuration constant for deterministic tie-break
+// order (requirement #6). When two or more dimensions land on the exact
+// same score, whichever appears first here wins the tie — reviewable and
+// changeable in one place, never randomized, never based on score.
+var TIE_BREAK_ORDER = DIMENSION_ORDER;
+
+function emptyAnswers() {
+  return [null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];
+}
+
+var MOTIVATION_OPTIONS = [
+  { id: 'understand_self', label: 'อยากเข้าใจสไตล์การเป็นผู้นำของตัวเอง' },
+  { id: 'communicate_team', label: 'อยากสื่อสารกับทีมให้เข้าใจกันมากขึ้น' },
+  { id: 'motivate_ownership', label: 'อยากสร้างแรงจูงใจและ Ownership ให้ทีม' },
+  { id: 'facing_problem', label: 'กำลังเจอปัญหาในการบริหารหรือพัฒนาทีม' },
+  { id: 'interested_leadership_dev', label: 'สนใจแนวทางพัฒนาภาวะผู้นำ' },
+  { id: 'other', label: 'อื่น ๆ' }
+];
+
+function emptyLead() {
+  return {
+    email: '',
+    motivation: null,
+    motivationOther: '',
+    startedAt: null,
+    completedAt: null,
+    ctaClicked: false
+  };
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value || '').trim());
+}
+
+// ---------------------------------------------------------------------
+// LINE OA hand-off + lead data structure (frontend + config only — no
+// automation and no CRM integration built yet).
+//
+// LINE_INTENT_CODE ("asspol" = Assessment – Psychology of Leadership) is
+// the code this assessment's CTA is meant to carry through to LINE, so a
+// future LINE OA flow can recognize where the lead came from and reply
+// with a dedicated greeting, e.g.:
+//
+//   สวัสดีค่ะ ขอบคุณที่ทำแบบประเมิน Leadership Motivation Assessment 🌱
+//   หากต้องการพูดคุยเพิ่มเติมเกี่ยวกับผลประเมิน
+//   หรืออยากให้ทีมช่วยแนะนำแนวทางพัฒนาภาวะผู้นำที่เหมาะกับคุณ
+//   สามารถพิมพ์คำว่า ASSPOL เพื่อเริ่มต้นพูดคุยกับทีม LifeEnricher ได้เลยค่ะ
+//
+// This greeting is NOT live — no LINE automation exists yet. Nothing in
+// this file claims otherwise.
+//
+// LINE_OA_URL and CRM_ENDPOINT_URL are placeholders until a real
+// LifeEnricher LINE OA link and/or CRM endpoint are provided — swap them
+// in here once available. Until then the CTA safely points nowhere
+// (buildLineHref() below returns an inert anchor) and getLeadRecord()
+// below simply assembles the lead data structure without sending it
+// anywhere.
+// ---------------------------------------------------------------------
+var LINE_OA_URL = 'https://lhco.li/4repHOq';
+var LINE_INTENT_CODE = 'asspol';
+var CRM_ENDPOINT_URL = 'CRM_ENDPOINT_URL';
+
+function buildLineHref() {
+  var notConfigured = !LINE_OA_URL || LINE_OA_URL === 'LINE_OA_URL';
+  if (notConfigured) return '#line-oa-not-configured';
+  var sep = LINE_OA_URL.indexOf('?') === -1 ? '?' : '&';
+  return LINE_OA_URL + sep + 'lead_source=' + encodeURIComponent(LINE_INTENT_CODE);
+}
+var state={step:'intro',qIndex:0,answers:emptyAnswers(),lead:emptyLead(),showErrors:false};
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function stats(){return DIMENSION_ORDER.map(function(dim){var raw=DIMENSION_QUESTION_INDEXES[dim].reduce((sum,i)=>sum+((state.answers[i]&&state.answers[i].score)||0),0);var pct=Math.max(0,Math.min(100,Math.round(((raw-4)/12)*100)));return {id:dim,name:DIMENSION_META[dim].name,raw:raw,pct:pct}})}
+function strengthRank(a){return a.slice().sort((x,y)=>y.pct-x.pct||TIE_BREAK_ORDER.indexOf(x.id)-TIE_BREAK_ORDER.indexOf(y.id))}
+function devRank(a){return a.slice().sort((x,y)=>x.pct-y.pct||TIE_BREAK_ORDER.indexOf(x.id)-TIE_BREAK_ORDER.indexOf(y.id))}
+function captureParams(){var p=new URLSearchParams(location.search); return {utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||'',utm_content:p.get('utm_content')||'',utm_term:p.get('utm_term')||'',referrer:document.referrer||''}}
+function leadRecord(){var s=stats(), strongest=strengthRank(s)[0];return Object.assign({},state.lead,captureParams(),{result:strongest.name,result_dimension:strongest.id,dimension_scores:s,answers:state.answers.map(a=>a?{id:a.id,score:a.score}:null),page_url:location.href})}
+function maybeSend(eventName){var rec=Object.assign({event:eventName,timestamp:new Date().toISOString()},leadRecord()); try{localStorage.setItem('le_assessment_last',JSON.stringify(rec))}catch(e){}; if(CRM_ENDPOINT_URL&&CRM_ENDPOINT_URL!=='CRM_ENDPOINT_URL'){fetch(CRM_ENDPOINT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec),keepalive:true}).catch(()=>{})}}
+function header(){return `<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:28px 24px 0"><div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;border-radius:50%;background:#972626"></div><div style="font-size:11px;font-weight:700;letter-spacing:.16em;opacity:.7">LIFEENRICHER</div></div></div>`}
+function intro(){var m=state.lead.motivation;return `<div class="le-root"><div style="min-height:844px;display:flex;flex-direction:column"><div style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:28px 24px 0"><div style="display:flex;align-items:center;gap:8px"><div style="width:6px;height:6px;border-radius:50%;background:#972626"></div><div style="font-size:11px;font-weight:700;letter-spacing:.16em;opacity:.7">LIFEENRICHER</div></div><div style="font-size:10.5px;font-weight:700;color:#972626;border:1px solid rgba(151,38,38,.28);border-radius:999px;padding:5px 9px">เวอร์ชันทดสอบภายใน</div></div>
+<div style="padding:18px 24px 0"><div style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#972626;margin-bottom:18px">เครื่องมือประเมินเพื่อการเรียนรู้ตนเอง</div><h1 style="margin:0;font-size:34px;line-height:1.22;font-weight:800">แบบประเมิน<br>แรงจูงใจการเป็นผู้นำ</h1><div style="width:48px;height:3px;background:#972626;border-radius:2px;margin:20px 0"></div><p style="margin:0;font-size:15px;line-height:1.75;opacity:.82">ค้นพบแรงจูงใจเบื้องหลังการตัดสินใจของคุณ และวิธีที่มันหล่อหลอมการนำทีมในแบบของคุณ — เพื่อเข้าใจตนเองอย่างลึกซึ้ง และนำคนด้วยความเข้าใจที่แท้จริง</p><div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:24px"><span>16 คำถาม</span><span>• 5–7 นาที</span><span>• ผลลัพธ์เฉพาะบุคคล</span></div><p style="font-size:12px;line-height:1.7;opacity:.48">แบบสำรวจนี้เป็นเครื่องมือสะท้อนแนวคิดผู้นำเพื่อการพัฒนาตนเอง ไม่ใช่แบบทดสอบทางจิตวิทยาที่ผ่านการรับรอง</p></div>
+<div style="height:1px;background:rgba(28,24,25,.1);margin:24px"></div><div style="padding:0 24px"><div style="font-size:13.5px;font-weight:700;margin-bottom:4px">อีเมลของคุณ</div><div style="font-size:12.5px;opacity:.6;margin-bottom:12px">เพื่อรับผลประเมินและคำแนะนำที่เหมาะกับคุณ</div><input id="email" class="le-input" type="email" placeholder="you@example.com" value="${esc(state.lead.email)}">${state.showErrors&&!isValidEmail(state.lead.email)?'<div class="le-error-text">กรุณากรอกอีเมลที่ถูกต้อง</div>':''}</div>
+<div style="padding:24px 24px 0"><div style="font-size:13.5px;font-weight:700;margin-bottom:12px">อะไรคือเหตุผลหลักที่ทำให้คุณสนใจทำแบบประเมินนี้?</div><div style="display:flex;flex-direction:column;gap:10px">${MOTIVATION_OPTIONS.map(o=>`<button class="le-card ${m===o.id?'selected':''}" data-mot="${o.id}" style="padding:13px 16px"><span class="le-dot"></span><span style="font-size:13.5px">${esc(o.label)}</span></button>`).join('')}</div>${state.showErrors&&!m?'<div class="le-error-text">กรุณาเลือกเหตุผลอย่างน้อย 1 ข้อ</div>':''}${m==='other'?`<div style="margin-top:12px"><input id="other" class="le-input" type="text" placeholder="โปรดระบุ" value="${esc(state.lead.motivationOther)}">${state.showErrors&&!state.lead.motivationOther.trim()?'<div class="le-error-text">กรุณาระบุเหตุผลของคุณ</div>':''}</div>`:''}</div>
+<div style="padding:26px 24px 30px"><button id="start" class="le-btn-primary" style="width:100%;background:#972626;color:#F9F9F9;border:0;border-radius:14px;padding:17px 20px;font:inherit;font-weight:700">เริ่มทำแบบประเมิน →</button><div style="text-align:center;font-size:11.5px;opacity:.5;margin-top:14px">ข้อมูลของคุณจะถูกเก็บเป็นความลับ • ไม่ต้องเข้าสู่ระบบ • ไม่ต้องตั้งรหัสผ่าน</div></div></div></div>`}
+function question(){var q=QUESTIONS[state.qIndex],ans=state.answers[state.qIndex],pct=Math.round((state.qIndex+1)/16*100);return `<div class="le-root"><div style="min-height:844px;display:flex;flex-direction:column"><div style="display:flex;justify-content:space-between;padding:24px 24px 0"><button id="back" style="border:1px solid #ddd;background:none;border-radius:50%;width:32px;height:32px">‹</button><div style="font-size:11px;font-weight:700;letter-spacing:.14em;opacity:.55">แรงจูงใจการเป็นผู้นำ</div><button id="exit" class="le-text-link" style="border:0;background:none">ออก</button></div><div style="padding:22px 24px 0"><div style="display:flex;justify-content:space-between;margin-bottom:9px"><b>คำถาม ${state.qIndex+1} จาก 16</b><b style="color:#972626">${pct}%</b></div><div class="le-meter-track"><div class="le-meter-fill" style="width:${pct}%"></div></div></div><div style="flex:1;padding:30px 24px 0"><h2 style="margin:0 0 22px;font-size:21px;line-height:1.5">${esc(q.text).split('\n').join('<br>')}</h2><div style="display:flex;flex-direction:column;gap:11px">${q.options.map(o=>`<button class="le-card ${ans&&ans.id===o.id?'selected':''}" data-opt="${o.id}"><span class="le-dot"></span><span>${esc(o.label)}</span></button>`).join('')}</div></div><div style="padding:18px 24px 30px"><button id="next" class="le-next ${ans?'':'disabled'}">${state.qIndex===15?'ดูผลลัพธ์':'ถัดไป'} →</button><div style="text-align:center;margin-top:14px"><button id="back2" class="le-text-link" style="border:0;background:none">ย้อนกลับ</button></div></div></div></div>`}
+function result(){var s=stats(),strong=strengthRank(s)[0],dev=devRank(s).filter(d=>d.id!==strong.id).slice(0,3);return `<div class="le-root"><div style="padding-bottom:64px">${header()}<div style="padding:30px 24px 0"><div style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#972626;margin-bottom:14px">ผลการประเมินของคุณ</div><div style="font-size:17px;opacity:.75">จุดแข็งหลักของคุณ</div><h1 style="margin:6px 0 0;font-size:32px;color:#972626">${esc(strong.name)}</h1></div><div style="height:1px;background:#ddd;margin:30px 24px"></div><div style="padding:0 24px"><div style="font-size:12px;font-weight:700;letter-spacing:.12em;color:#972626;margin-bottom:18px">มิติแรงจูงใจของคุณ</div>${s.map(i=>`<div style="margin-bottom:18px"><div style="display:flex;justify-content:space-between;margin-bottom:8px"><span>${esc(i.name)}</span><b style="color:#972626">${i.pct}%</b></div><div class="le-meter-track"><div class="le-meter-fill" style="width:${i.pct}%"></div></div></div>`).join('')}</div><div style="padding:20px 24px 0"><div style="background:#972626;border-radius:18px;padding:22px;color:#F9F9F9"><div style="font-size:11.5px;font-weight:700;letter-spacing:.1em;opacity:.8;margin-bottom:10px">จุดแข็งของคุณ</div><p style="margin:0;font-size:14.5px;line-height:1.75">${esc(DIMENSION_META[strong.id].strength)}</p></div></div><div style="height:1px;background:#ddd;margin:36px 24px"></div><div style="padding:0 24px"><h3 style="font-size:20px">3 เรื่องที่คุณสามารถพัฒนาต่อได้</h3>${dev.map((i,n)=>`<div style="border:1.5px solid rgba(151,38,38,.35);border-radius:18px;padding:20px;margin-bottom:14px"><div style="display:flex;gap:10px;align-items:center"><b style="background:#972626;color:white;border-radius:50%;width:24px;height:24px;text-align:center">${n+1}</b><b style="flex:1">${esc(i.name)}</b><b style="color:#972626">${i.pct}%</b></div><p style="font-size:13.5px;line-height:1.7">${esc(DIMENSION_META[i.id].development)}</p><p style="font-size:13px;line-height:1.65"><b style="color:#972626">ลองทำ</b> ${esc(DIMENSION_META[i.id].suggestion)}</p></div>`).join('')}</div><div style="height:1px;background:#ddd;margin:40px 24px"></div><div style="padding:0 24px"><div style="font-size:15px;font-weight:600;opacity:.7;margin-bottom:14px">อยากเข้าใจเรื่องนี้ให้ลึกขึ้น?</div><h3 style="margin:0 0 10px;font-size:21px;color:#972626">Psychology of Leadership<br>– Essential Leadership</h3><div style="font-size:15px;font-weight:600;font-style:italic;opacity:.75;margin-bottom:14px">“ก่อนนำใจ ต้องเข้าใจคน”</div><p style="font-size:14px;line-height:1.8;opacity:.7">หากคุณต้องการเข้าใจแรงจูงใจ การสื่อสาร การตัดสินใจ และพฤติกรรมของคนให้ลึกขึ้น ทีม LifeEnricher พร้อมช่วยพูดคุยและแนะนำแนวทางที่เหมาะกับบริบทการนำทีมของคุณ</p><a id="line" class="le-line-btn" href="${buildLineHref()}" target="_blank" rel="noopener" style="width:100%;display:flex;justify-content:center;background:#972626;color:white;border-radius:14px;padding:16px 20px;font-weight:700;text-decoration:none">สอบถามข้อมูลเพิ่มเติม</a><p style="font-size:11.5px;opacity:.5;text-align:center">กดเพื่อเพิ่มเพื่อน LINE Official Account และพูดคุยกับทีม LifeEnricher</p></div><div style="padding:30px 24px;text-align:center"><b style="font-size:11px;letter-spacing:.16em;opacity:.5">LIFEENRICHER</b><div style="font-size:12px;opacity:.4;margin-top:6px">เข้าใจคนอย่างลึกซึ้ง นำด้วยเจตนา</div><button id="restart" class="le-text-link" style="border:0;background:none;margin-top:16px">เริ่มการประเมินใหม่อีกครั้ง</button></div></div></div>`}
+function render(){document.getElementById('app').innerHTML=state.step==='intro'?intro():state.step==='question'?question():result(); bind()}
+function bind(){if(state.step==='intro'){var e=document.getElementById('email');e.oninput=()=>state.lead.email=e.value;document.querySelectorAll('[data-mot]').forEach(b=>b.onclick=()=>{state.lead.motivation=b.dataset.mot;state.showErrors=false;render()});var o=document.getElementById('other');if(o)o.oninput=()=>state.lead.motivationOther=o.value;document.getElementById('start').onclick=()=>{state.lead.email=e.value.trim();if(o)state.lead.motivationOther=o.value.trim();state.showErrors=true;if(!isValidEmail(state.lead.email)||!state.lead.motivation||(state.lead.motivation==='other'&&!state.lead.motivationOther.trim()))return render();state.lead.startedAt=new Date().toISOString();state.step='question';maybeSend('assessment_start');render();scrollTo(0,0)}}else if(state.step==='question'){document.querySelectorAll('[data-opt]').forEach(b=>b.onclick=()=>{state.answers[state.qIndex]=QUESTIONS[state.qIndex].options.find(o=>o.id===b.dataset.opt);render()});var back=()=>{if(state.qIndex===0)state.step='intro';else state.qIndex--;render();scrollTo(0,0)};document.getElementById('back').onclick=back;document.getElementById('back2').onclick=back;document.getElementById('exit').onclick=()=>{state.step='intro';render()};document.getElementById('next').onclick=()=>{if(!state.answers[state.qIndex])return;if(state.qIndex===15){state.lead.completedAt=new Date().toISOString();state.step='result';maybeSend('assessment_complete')}else state.qIndex++;render();scrollTo(0,0)}}else{document.getElementById('line').onclick=()=>{state.lead.ctaClicked=true;maybeSend('line_click')};document.getElementById('restart').onclick=()=>{state={step:'intro',qIndex:0,answers:emptyAnswers(),lead:emptyLead(),showErrors:false};render();scrollTo(0,0)}}}
+render();
+</script></body></html>
